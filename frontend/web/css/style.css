@@ -1,0 +1,134 @@
+@charset "utf-8";
+/* CSS Document */
+
+/* ALL STYLE CSS  (ОБЩИЕ СТИЛИ)
+************************************/
+*{box-sizing: border-box; /*display: block;*/}
+section { position: relative; left:50%; transform: translateX(-50%);}
+img {display: block;}
+.icon_tb {font-weight: 900;}
+/*DEBUG FRAIMWORK*/
+.deb_all {margin-bottom: 0;}
+@media only screen and (min-width: 600px) {
+	.push-s1 {left:auto !important;}
+	.drag-target {z-index: 1 !important;}
+}
+html, body, .block {height: 100%;}
+/*Header style all*/
+.HH_all {font-weight: 900; color:rgba(59,67,78,1.00); text-align: center;}
+@media only screen and (max-width: 600px) {.HH_all {font-size:22px;} }
+/*BTN ALL PROCET*/
+.btn_all {background-color: rgba(1,1,1,0.00); box-shadow: none !important;}
+.btn_border {border:3px solid rgba(51,178,153,1.00); border-radius: 33px; line-height: 29px;}
+/*ERROR MESAGE ALL*/
+.success {color: #3c763d;background-color: #dff0d8;border-color: #d6e9c6;}
+.info {color: #31708f;background-color: #d9edf7;border-color: #bce8f1;}
+.warrning {color: #8a6d3b;background-color: #fcf8e3;border-color: #faebcc;}
+.danger {color: #a94442;background-color: #f2dede;border-color: #ebccd1;}
+
+/* NAVBAR ALL STYLE CSS  (НАВИГАЦИОННОЕ МЕНЮ )
+************************************/
+#nav_top {background-color: rgba(1,1,1,0.00); box-shadow: none;}
+/*navigation button all style*/
+.nav_btn:hover, .nav_btn:active, .nav_btn:focus {background-color: rgba(1,1,1,0.00); color:rgba(51,178,153,1.00);}
+
+/*SUB NAVBAR ALL */
+.NAV_sub_all {background-color:rgba(255,255,255,1.00);}
+.NAV_logo {margin-top:20px;}
+.NAv_logo img {display: block !important;}
+#nav_sub  a {color:rgba(1,1,1,1.00);}
+#nav_sub  a:hover, #nav_sub a.active {color:rgba(46,214,251,1.00); background-color: rgba(1,1,1,0.00);}
+/* SECTION ONE: SLIDER STYLE CSS  (СЕКЦИЯ ОДИН: СЛАЙДЕР )
+************************************/
+.SL_all {width: 100%; height:100vh; position: relative; left:0; top:0;max-height: 860px; min-height: 600px; background-image: url(../images/slider_top/slider_one.jpg); background-size: cover; background-attachment: fixed; display: block;}
+/*Header*/
+.SL_h_bl {color:rgba(46,214,251,1.00); font-weight: 100;}
+.SL_h_st {font-weight: 900; text-align: center; color:#fff;}
+
+@media only screen and (min-width: 600px) {
+.SL_m_t {padding-top: 60px !important;}}
+/*Information block*/
+.SL_btn {border:2px solid #fff; padding: 25px 25px;width: 200px; height: 50px; line-height: 40px; color:#fff; text-align: center; font-weight: 700; position: relative; left:50%; transform: translateX(-50%); display: block;}
+/* SECTION TWO: ABOUT US CSS  (СЕКЦИЯ ДВА: О НАС )
+************************************/
+.AB_all { display:inline-table; padding-bottom: 55px; position: relative; left:50%; transform: translateX(-50%);}
+.AB_hh {text-align: center;height: 70px; line-height: 70px; font-weight: 900;color:rgba(59,67,78,1.00);}
+@media only screen and (max-width: 600px) {.AB_d_ul {margin-top:15px;}}
+.AB_ul {padding: 25px 5px;}
+.AB_ul li{padding:5px 15px;}
+/*IMAGES BLOCK*/
+.AB_i_all {min-height: 360px; background-color:rgba(59,67,78,1.00); position: relative; margin-top:15px; background-image: url(../images/about/history.jpg); background-size: cover; background-attachment: inherit;}
+.AB_i_hh {color:#fff; font-weight: 700; line-height: 25px; text-align: center;}
+@media only screen and (max-width: 600px) {.AB_i_a {width:150px; margin-bottom: 15px;}}
+.AB_i_a {padding: 2px; margin-top:15px;}
+.AB_i_a:hover { color:rgba(51,178,153,1.00); border-color:rgba(51,178,153,1.00);}
+
+/* SECTION THREE: INVESTMENT PLANS  (СЕКЦИЯ ТРИЖ Инвестиционные планы )
+************************************/
+.IP { display: inline-block; background-color:#fff;  width: 100%;padding-bottom: 50px;}
+.IP_pp {background-color: rgba(45,58,78,1.00); text-align: center; color:#fff; font-size:50px;}
+.IP_pp p {margin: 0; padding: 25px 0;}
+.IP_dd {text-align: center; font-weight: 700; }
+.IP_dd p {margin: 0;}
+.IP_d_n {font-size:55px; margin: 0; font-weight: 300; color:rgba(46,214,251,1.00);}
+.IP_all {border-bottom:1px solid #eee; margin-top:10px;}
+@media only screen and (max-width: 600px) {.IP_all {border:2px solid #eee; margin-top:25px;}}
+.IP_dp {text-align: center; border-right: 1px solid rgba(233,230,230,1.00); height: 125px; border-left:  1px solid rgba(233,230,230,1.00);}
+@media only screen and (max-width: 600px) {
+	.IP_dp {border-left:none; border-right:none; border-top: 1px solid rgba(233,230,230,1.00); border-bottom: 1px solid rgba(233,230,230,1.00);}
+}
+.IP_dp p {margin: 0;}
+.IP_dp_hh {font-size:11px; font-weight: 900;}
+.IP_dp_s {font-size: 24px; font-weight: 900;}
+.IP_dp_pi {font-size:13px; font-weight: 900;}
+/**/
+.IA_btn {border-radius: 33px; background-color: rgba(86,231,166,1.00); border:2px solid rgba(86,231,166,1.00); height: 40px; margin-top:20px; line-height: 36px;}
+.IA_btn:hover, .IA_btn:active, .IA_btn:focus, .IA_btn.active  {background-color: rgba(255,255,255,1.00); border:2px solid rgba(86,231,166,1.00); color: rgba(86,231,166,1.00);}
+.IP_btn {border:2px solid black; color:black; margin-top:45px;}
+
+
+/* SECTION FOUR: WHY CHOOSE US  (СЕКЦИЯ ЧЕТЫРЕ Почему мы )
+************************************/
+.WC { width:100%; background-color: #F5F5F5; padding-bottom: 55px; display: inline-block;}
+
+.WC_block_all {margin-top:20px;}
+.WC_img {width:40px; height: 40px; position: relative; left:50%; transform: translateX(-50%); margin-top:15px;display:block;}
+.WC_hh {font-size:11px; font-weight: 900; margin:0;}
+.WC_ss {font-size:14px; line-height: 25px; margin:0;}
+
+
+/* SECTION FIVE: OUR PARTNERS  (СЕКЦИЯ ПЯТЬ:Наши партнёры )
+************************************/
+.OP {width:100%; background-color:#fff; display: inline-block;}
+.OP_b_i {height:150px;}
+.OP_img {position: relative; left:50%; transform: translateX(-50%);}
+
+
+/* SECTION SIX: BISNES INFO  (СЕКЦИЯ ШЕСТЬ: БИЗНЕС ИНФОРМАЦИЯ )
+************************************/
+.BI {width:100%; display: inline-block; min-height: 300px; padding-bottom:50px; background-image: url(../images/bisnes/bisnes_info.jpg); background-size: cover; background-attachment: inherit;}
+.BI_block_all {font-weight: 900; color:#fff; text-align: center; position: relative;}
+.BI_hh {font-size:16px; margin:0;}
+.BI_num {font-size:22px; margin:0;}
+.BI_img {position: relative; left:50%; transform: translateX(-50%);margin: 25px 0 15px 0;}
+
+
+/* SECTION SEVEN: HISTORIY PAYMENTS  (СЕКЦИЯ СЕМЬ: ИСТОРИЯ ПОЛПОЛНЕНИЙ )
+************************************/
+.HP {width:100%; display: inline-block; background-color:#F5F5F5; padding-bottom:50px;}
+.HP_name_t {font-weight: 900;color: rgba(59,67,78,1.00); text-align: left;}
+.HP_th {color:#fff; background-color:rgba(47,61,82,1.00);}
+.HP_th th {font-weight: 100;}
+
+/* SECTION EIGHT: WE ACCEPT  (СЕКЦИЯ ВОСЬМ: МЫ ПРИНИМАЕМ )
+************************************/
+.WA { width:100%; display: inline-block; padding-bottom:50px; background-color:#fff;}
+.WA_con {margin-top:75px;}
+
+
+/* FOTTER STYLE ALL  (ПОДВАЛ )
+************************************/
+.FT {width: 100%; background-color:rgba(47,61,82,1.00);}
+.NAV_ft_all {background-color:rgba(1,1,1,0.00); box-shadow: none !important;}
+.NAV_ft_all a {color:#fff;}
+.NAV_ft_all a:hover, .NAV_ft_all a.active {color:rgba(46,214,251,1.00); background-color: rgba(1,1,1,0.00);}
