@@ -1,0 +1,182 @@
+
+
+.contact_us {
+    padding: 112px 0 70px;
+    background: #F5F5F5; 
+}
+.contact_us h2 {
+    font-family: SFUIDisplay-Bold;
+    font-size: 38pt;
+    color: #3B434E;
+    text-transform: uppercase;
+    margin-bottom: 55px;
+}
+
+.support, .adress {
+    float: left; width: 590px; height: 500px; margin-right: 20px; padding-top: 60px;
+    background: #fff; text-align: center; box-sizing: border-box;
+}
+.adress {
+    margin-right: 0;
+} 
+.contact_form h4 {
+    font-family: SFUIDisplay-Bold;
+    font-size: 18pt;
+    color: #3B434E;
+    text-transform: uppercase;
+    margin-bottom: 35px;
+}
+
+.support .text {
+    width: 365px;
+    height: 45px;
+    box-sizing: border-box;
+    padding: 10px 20px;
+    color: #96979b;
+    font-size: 12pt;
+    font-family: SF-UI-Display;
+    border: 1px solid #BCBCBC;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+.support textarea {
+    width: 365px;
+    height: 115px;
+    box-sizing: border-box;
+    padding: 15px 20px 10px;
+    color: #96979b;
+    font-size: 12pt;
+    font-family: SF-UI-Display;
+    border: 1px solid #BCBCBC;
+    border-radius: 5px;
+    resize: none;
+}
+
+.submit {
+    display: block;
+    width: 365px;
+    height: 45px;
+    background: #56E7A6;
+    border-radius: 17px;
+    font-size: 12pt;
+    font-family: SFUIDisplay-Black;
+    color: #fff;
+    text-align: center;
+    outline: none;
+    border: none;
+    margin: 20px auto;
+    text-transform: uppercase;cursor: pointer; transition: all .5s;
+}
+.submit:hover {
+    color: #56E7A6;
+    background: #fff;
+    border: 2px solid #56E7A6;
+    transition: all .5s;
+}
+.contact_form .adress h4 {
+    padding-bottom: 75px;
+}
+
+.contact_form .adress p {
+    display: block;
+    position: relative;
+    width: 240px;
+    margin: 0 auto;
+    color: #3b434e;
+    font-size: 12pt;
+    font-family: SF-UI-Display;
+    line-height: 2;
+    text-align: left;
+}
+.contact_form .adress p::before {
+    position: absolute;
+    content: '';
+    width: 12px;
+    height: 20px;
+    top: 8px;
+    left: -33px;
+    background: url(../img/local.jpg)no-repeat;
+}
+.contact_form .adress .admin-x {
+    margin-top: 55px;
+}
+.contact_form .adress .admin-x:before {
+    position: absolute;
+    content: '';
+    width: 20px;
+    height: 12px;
+    top: 12px;
+    left: -33px;
+    background: url(../img/mail.jpg)no-repeat;
+}
+.contact_form img {
+    margin-top: 20px;
+}
+
+
+@media screen and (max-width: 1199px)   {
+    .support, .adress { width: 490px;}
+    .contact_form img { width: 1000px;}
+}
+@media screen and (max-width: 1023px)   {
+    .contact_us {
+    padding: 65px 0 40px;
+    }
+    .support, .adress {
+    width: 365px;
+    height: 450px;
+    padding-top: 40px;
+    }
+    .support .text {
+    width: 300px;
+    height: 40px;
+    }
+    .support textarea {
+    width: 300px;
+    height: 100px;
+    }
+    .submit { width: 300px;}
+    .contact_form img { width: 750px;}
+
+}
+@media screen and (max-width: 767px)   {
+    .support, .adress {
+    float: none;
+    width: 550px;
+    height: 450px;
+    margin-right: 0;
+    padding-top: 40px;
+    margin-bottom: 20px;
+}
+.support .text {
+    width: 450px;
+    height: 45px;
+}
+.support textarea {
+    width: 450px;
+    height: 115px;
+}
+.submit { width: 450px;}
+.contact_form .adress p { text-align: center;}
+.contact_form img { width: 550px;}
+}
+
+@media only screen and (max-width: 560px)  {
+    .support, .adress {
+    width: 320px;
+    height: 400px;
+    }
+    .support .text {
+    width: 300px;
+    height: 40px;
+    }
+    .support textarea {
+    width: 300px;
+    height: 100px;
+    }
+    .submit { width: 300px;}
+    .contact_form .adress p::before, .contact_form .adress .admin-x::before { left: -15px;}
+    .contact_form img { width: 320px;}
+
+
+}

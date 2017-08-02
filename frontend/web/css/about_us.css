@@ -1,0 +1,179 @@
+
+.meet_capital {
+    padding: 110px 0 0px; 
+    background: #F5F5F5;
+}
+.meet_capital h2 {
+    font-family: SFUIDisplay-Bold;
+    font-size: 38pt;
+    color: #3B434E;
+    text-transform: uppercase;
+    margin-bottom: 50px;
+}
+.meet_capital p {
+    font-family: SF-UI-Display;
+    font-size: 11pt;
+    color: #3B434E;
+    line-height: 1.8;
+}
+.meets {
+    margin-top: 100px;
+}
+.meets .left {
+    float: left; width: 500px;
+    text-align: left; padding-top: 50px;
+}
+.meets .right {
+    float: right;
+}
+.meets .number {
+    display: block; width: 106px; height: 120px;
+    background: url(../img/number.png)no-repeat;
+    background-size: 100%;
+    font-family: SFUIDisplay-Light;font-size: 45pt;
+    color: #3B434E; text-align: center;
+    box-sizing: border-box;
+    padding-top: 5px;
+    margin-bottom: 60px;
+}
+
+.meets-rights .left {
+    width: 665px; padding-top: 0
+}
+.meets-rights .right {
+    width: 500px;padding-top: 50px; position: relative;
+}
+.meets-rights .right p {
+    text-align: right;
+}
+.meets-rights .right .number {
+    text-align: center;
+    float: right;
+
+}
+
+
+.meets_3 .number {
+    margin: 0 auto 60px;
+}
+
+
+.meets_3 p {
+    width: 810px;
+    display: block;
+    text-align: center;
+    margin: 0 auto 70px;
+}
+.certificate {
+    margin: 90px 0 85px; height: 125px;
+}
+.meets_3 .certificate p {
+    float: left;
+    width: 170px;
+    color: #2f3d52; font-family: SF-UI-Display; font-size: 11pt; padding-top: 50px;
+}
+.meets_3 .certificate p a {
+    color: #2ED6FB; text-decoration: underline;
+}
+.meets_3 .certificate img {
+    display: block;
+    float: left;
+    margin-left: 20px;
+
+}
+
+@media screen and (max-width: 1199px)   {
+
+    header, .container, .choose-items {width: 1000px;}
+
+    .meets {margin-top: 40px;}
+    .meets .right img, .meets-rights .left img {width: 550px; height: 450px;}
+    .meets .left, .meets-rights .right { width: 400px; padding-top: 20px;}
+    .meets .number { margin-bottom: 20px;}
+    .meets_3 .clock {width: 1000px;}
+    .meet_capital {  padding: 70px 0 0px;}
+}
+
+@media screen and (max-width: 1023px)   {
+
+.meets .right img, .meets-rights .left img {
+    width: 410px;
+    height: 350px;
+}
+.meets .left, .meets-rights .right {
+    width: 340px;
+    padding-top: 0px;
+}
+.meets .number {
+    display: block;
+    width: 80px;
+    height: 86px;
+    background: url(../img/number.png)no-repeat;
+    background-size: 100%;
+    font-family: SFUIDisplay-Light;
+    font-size: 35pt;
+    color: #3B434E;
+    text-align: center;
+    box-sizing: border-box;
+    padding-top: 5px;
+    margin-bottom: 5px;
+}
+.meet_capital p { font-size: 10pt;}
+.meets_3 p {
+    width: 750px;}
+    .meets_3 .clock {
+    width: 750px;
+}
+}
+@media screen and (max-width: 767px)   {
+.meets .left, .meets-rights .right {
+    width: 550px;
+    padding-top: 0;
+    text-align: center;
+}
+.meets .number { display: inline-block;}
+.meets .right img, .meets-rights .left img {
+    width: 550px;
+    height: 350px;
+}
+.meets-rights .right .number {
+    text-align: center;
+    float: none;
+    margin-top: 25px;
+}
+.meets_3 p { width: 550px;}
+.meets_3 .clock { width: 550px;}
+.certificate {
+    margin: 30px 0 25px;
+    height: 125px;
+}
+
+
+}
+
+@media only screen and (max-width: 560px)  {
+
+.meets .left, .meets-rights .right {
+    width: 320px;
+    padding-top: 0;
+    text-align: center;
+    margin-bottom: 15px;
+}
+.meets .right img, .meets-rights .left img {
+    width: 320px;
+    height: 250px;
+}
+.meets-rights .right p {
+    text-align: center;
+}
+.meets_3 p {
+    width: 320px;
+    display: block;
+    text-align: center;
+    margin: 0 auto 30px;
+}
+.meets_3 .clock {
+    width: 320px;
+}
+
+}

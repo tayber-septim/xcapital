@@ -1,0 +1,34 @@
+
+.rules {
+    padding: 115px 0 65px;
+    background: #F5F5F5; 
+}
+.rules h2 {
+    font-family: SFUIDisplay-Bold;
+    font-size: 38pt;
+    color: #3B434E;
+    text-transform: uppercase;
+    margin-bottom: 65px;
+}
+
+.rules p {
+    margin: 0 auto 50px;
+    color: #3B434E;
+    font-size: 12pt;
+    font-family: SF-UI-Display;
+    line-height: 2;
+    text-align: left;
+}
+
+@media screen and (max-width: 767px)   {
+    .rules {
+    padding: 65px 0 45px;
+    background: #F5F5F5;
+}
+.rules p {
+    margin: 0 auto 30px;
+    text-align: center;
+}
+.rules h2 { margin-bottom: 35px;}
+
+}

@@ -1,124 +1,119 @@
 <?php
-/**
- * File Paypal.php.
- *
- * @author Andrey Klimenko <andrey.iemail@gmail.com>
- * @see https://github.com/paypal/rest-api-sdk-php/blob/master/sample/
- * @see https://developer.paypal.com/webapps/developer/applications/accounts
- */
-
 namespace common\components;
 
-use PayPal\Api\Address;
-use PayPal\Api\Amount;
-use PayPal\Api\CreditCard;
-use PayPal\Api\FundingInstrument;
-use PayPal\Api\Payer;
-use PayPal\Api\Payment;
-use PayPal\Api\Transaction;
-use PayPal\Rest\ApiContext;
-use yii\helpers\VarDumper;
-
 use yii\base\Component;
-use PayPal\Auth\OAuthTokenCredential;
-
-function D($object, $exit = false)
-{
-    VarDumper::dump($object, 20, 1);
-    echo '<br />';
-
-    if ($exit) {
-        exit();
-    }
-
-    return null;
-}
+use yii\helpers\Url;
 
 /**
- * Class Paypal.
- *
- * @package ak
- * @author Andrey Klimenko <andrey.iemail@gmail.com>
+ * Class PayPal
+ * @package app\components
  */
-class paypal extends Component
+class PayPal extends Component
 {
-    //region API settings
-    public $clientId;
-    public $clientSecret;
-    public $isProduction = false;
-    public $currency = 'USD';
+    public $user;
+    public $signature;
+    public $pwd;
 
-    private $version = '3.0';
-    //endregion
+    public $apiUrl = 'https://api-3t.sandbox.paypal.com/nvp';
+    public $baseUrl = 'https://www.sandbox.paypal.com/cgi-bin/webscr?cmd=_express-checkout';
 
-    private $_token = null;
-    /** @var ApiContext */
-    private $_apiContext = null;
+    public $successUrl = ['invest/success'];
+    public $errorUrl = ['invest/error'];
 
-    protected $errors = [];
-
-    public function initDemo()
+    /**
+     * @param $route
+     * @return string
+     */
+    public function buildReturnUrl($route)
     {
-        $this->clientId     = 'AbtvThBiEwaAysJbhOyI6VST02vs1mLCdJv8F8oCmZJUZNzLwQeHLuZiOF7r';
-        $this->clientSecret = 'ENM9BhCEllRx5CpmZdfb0dOnM4FAwGR42XXfYqKEQhv4KhuuJyeXFBeN2gQz';
+        return Url::toRoute($route, true);
     }
 
-    public function authorize()
+    /**
+     * @param $amount
+     * @param $currency
+     * @return mixed
+     */
+    public function getToken($amount, $currency)
     {
-        $credentials = new OAuthTokenCredential($this->clientId, $this->clientSecret);
-        if (is_null($this->_token)) {
-            $credentials->getAccessToken(['mode' => 'sandbox']);
-        }
-        $this->_apiContext = new ApiContext($credentials);
+        $successUrl = $this->buildReturnUrl($this->successUrl);
+        $errorUrl = $this->buildReturnUrl($this->errorUrl);
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $this->apiUrl);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "USER={$this->user}&SIGNATURE={$this->signature}&PWD={$this->pwd}&METHOD=SetExpressCheckout&VERSION=98&PAYMENTREQUEST_0_AMT={$amount}&PAYMENTREQUEST_0_CURRENCYCODE={$currency}&PAYMENTREQUEST_0_PAYMENTACTION=SALE&cancelUrl={$errorUrl}&returnUrl={$successUrl}");
+
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        parse_str($result, $data);
+        return $data;
     }
 
-    public function payDemo()
+    /**
+     * @param $amount
+     * @param $currency
+     * @return array
+     */
+    public function getTransactionToken($amount, $currency)
     {
-        $this->authorize();
-
-        $addr = new Address();
-        $addr->setLine1('52 N Main ST');
-        $addr->setCity('Johnstown');
-        $addr->setCountryCode('US');
-        $addr->setPostalCode('43210');
-        $addr->setState('OH');
-
-        $card = new CreditCard();
-        $card->setNumber('4417119669820331');
-        $card->setType('visa');
-        $card->setExpireMonth('11');
-        $card->setExpireYear('2018');
-        $card->setCvv2('874');
-        $card->setFirstName('Joe');
-        $card->setLastName('Shopper');
-        $card->setBillingAddress($addr);
-
-        $fi = new FundingInstrument();
-        $fi->setCreditCard($card);
-
-        $payer = new Payer();
-        $payer->setPaymentMethod('credit_card');
-        $payer->setFundingInstruments(array($fi));
-
-        $amountDetails = new \Paypal\Api\Details();
-        $amountDetails->setSubtotal('7.41');
-        $amountDetails->setTax('0.03');
-        $amountDetails->setShipping('0.03');
-
-        $amount = new Amount();
-        $amount->setCurrency('USD');
-        $amount->setTotal('7.47');
-        $amount->setDetails($amountDetails);
-
-        $transaction = new Transaction();
-        $transaction->setAmount($amount);
-        $transaction->setDescription('This is the payment transaction description.');
-
-        $payment = new Payment();
-        $payment->setIntent('sale');
-        $payment->setPayer($payer);
-        $payment->setTransactions(array($transaction));
-
-        $payment->create($this->_apiContext);
+        return $this->getToken($amount, $currency);
     }
-} 
+
+
+    /**
+     * @param $token
+     */
+    public function goToExpressCheckout($token)
+    {
+        $t = urldecode($token);
+        $token = '&token=' . $t;
+        \Yii::$app->response->redirect("{$this->baseUrl}" . "{$token}");
+    }
+
+    /**
+     * @param $token
+     * @return mixed
+     */
+    public function getDetails($token)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $this->apiUrl);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "USER={$this->user}&SIGNATURE={$this->signature}&PWD={$this->pwd}&METHOD=GetExpressCheckoutDetails&VERSION=93&TOKEN={$token}");
+
+        $result = curl_exec($ch);
+        curl_close($ch);
+        
+        parse_str($result, $data);
+        return $data;
+    }
+
+    /**
+     * @param $token
+     * @param $payerId
+     * @param $amount
+     * @param $currency
+     * @return mixed
+     */
+    public function confirm($token, $payerId, $amount, $currency)
+    {
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $this->apiUrl);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, "USER={$this->user}&SIGNATURE={$this->signature}&PWD={$this->pwd}&METHOD=DoExpressCheckoutPayment&VERSION=93&TOKEN={$token}&PAYERID={$payerId}&PAYMENTREQUEST_0_PAYMENTACTION=SALE&PAYMENTREQUEST_0_AMT={$amount}&PAYMENTREQUEST_0_CURRENCYCODE={$currency}");
+
+        $result = curl_exec($ch);
+        curl_close($ch);
+
+        parse_str($result, $data);
+        return $data;
+    }
+}

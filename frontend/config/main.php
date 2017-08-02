@@ -14,20 +14,28 @@ return [
 
     'components' => [
 
-        'paypal'=> [
-            'class'  => 'common\components\Paypal',
-            'clientId'  => '121212',
-            'clientSecret' => '1212312',
-            'isProduction' => false,
-             // This is config file for the PayPal system
-            //  'config' => [
-            //      'http.ConnectionTimeOut' => 30,
-            //      'http.Retry' => 1,
-            //      'mode' => "\common\components\Paypal::MODE_SANDBOX", 
-            //      'log.LogEnabled' => YII_DEBUG ? 1 : 0,
-            //      'log.FileName' => "@runtime/logs/paypal.log",
-            //      'log.LogLevel' => "\common\components\Paypal::LOG_LEVEL_INFO",
-            // ]
+        // 'paypal'=> [
+        //     'class'  => 'common\components\Paypal',
+        //     'clientId'  => 'AFcWxV21C7fd0v3bYYYRCpSSRl31AYGfzJ.8ExHV3jI4pSp6l3oPSo4q',
+        //     'clientSecret' => 'VCBPLHEW9XCWY7DM',
+        //     'isProduction' => false,
+
+        //      // This is config file for the PayPal system
+        //     //  'config' => [
+        //     //      'http.ConnectionTimeOut' => 30,
+        //     //      'http.Retry' => 1,
+        //     //      'mode' => "\common\components\Paypal::MODE_SANDBOX", 
+        //     //      'log.LogEnabled' => YII_DEBUG ? 1 : 0,
+        //     //      'log.FileName' => "@runtime/logs/paypal.log",
+        //     //      'log.LogLevel' => "\common\components\Paypal::LOG_LEVEL_INFO",
+        //     // ]
+        // ],
+
+        'paypal' => [
+            'class' => common\components\Paypal::class,
+            'user' => 'info-facilitator_api1.creditblaustein.com',
+            'signature' => 'AFcWxV21C7fd0v3bYYYRCpSSRl31AYGfzJ.8ExHV3jI4pSp6l3oPSo4q',
+            'pwd' => 'VCBPLHEW9XCWY7DM'
         ],
 
           'request' => [

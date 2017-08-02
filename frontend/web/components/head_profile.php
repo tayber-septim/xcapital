@@ -1,8 +1,4 @@
 <?php
-
-/* @var $this \yii\web\View */
-/* @var $content string */
-
 use yii\helpers\Html;
 use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
@@ -12,22 +8,9 @@ AppAsset::register($this);
 
 $this->beginPage(); 
 $link_all = '';
-//$url = $_SERVER['REQUEST_URI']; // Записываем в переменную значение адрресной строки
-//$link_all = 'http://ademo.ru';
-//ini_set('include_path', getenv(DOCUMENT_ROOT)."/components/"); //Устанавливаем каталог для подключения по умолчанию
-//require_once("connect.php"); // Подключаемся к БД
-//
-// Coonect to db
-//
-//
-// $url = explode('?', $url);
-// $url_key = trim(addslashes($url[0])); // Превращаем урл в строку
-// $url_go = mysql_fetch_array(mysql_query('SELECT * FROM `bs_titile` WHERE `url` = "'.$url_key.'" LIMIT 1')); // подключаемся к таблице и ищим страницу по url
-// if ($url_go == '') { // Если страница не найден в бд 	 
-//	$url_go['titlte'] = '404 || страница не найдна';
-//	$url_go['keyword']  = '404';
-//	$url_go['desription']  = '404';
-// } 
+ 
+    AppAsset::register($this);
+    $this->beginPage();
 ?>	
 <!DOCTYPE html>
 <html lang="ru">
@@ -44,8 +27,7 @@ $link_all = '';
 	<link rel="shortcut icon" href="<?php echo($link_all);?>/images/favicon.ico"> 
 	<link rel="stylesheet" type="text/css" href="<?php echo($link_all);?>/css/materialize.min.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo($link_all);?>/css/materialize.css" />
-	<link rel="stylesheet" type="text/css" href="<?php echo($link_all);?>/css/style.css" />
-	<!-- <link rel="stylesheet" type="text/css" href="<?php echo($link_all);?>/css/main.css" /> -->
+	<link rel="stylesheet" type="text/css" href="<?php echo($link_all);?>/css/main.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo($link_all);?>/css/font-awesome.min.css" />
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
 
@@ -54,4 +36,3 @@ $link_all = '';
 </head>
 <body>	
 <?php $this->beginBody(); ?>  
-

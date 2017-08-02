@@ -32,8 +32,8 @@ include "components/head.php";
       <a href="#" data-activates="slide-out" class="button-collapse black-text waves-effect waves-light"><i class="material-icons fa fa-bars"></i></a>
         <a href="<?php echo $link_all;?>" class="brand-logo NAV_logo"><img src="<?php echo $link_all;?>/images/logo.jpg" alt="XCapital"></a>
         <ul id="nav_sub" class="right hide-on-med-and-down">
-          <li><a href="#!" class="active">Home</a></li>
-          <li><a href="#!" class="dont_beta">About us</a></li>
+          <li><a href="/" class="active">Home</a></li>
+          <li><a href="/about" class="dont_beta">About us</a></li>
           <li><a href="#!" class="dont_beta">FAQ</a></li>
           <li><a href="#!" class="dont_beta">Contact us</a></li>
           <li><a href="#!" class="dont_beta">Terms of service</a></li>

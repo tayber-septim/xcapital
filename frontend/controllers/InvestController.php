@@ -2,52 +2,102 @@
 
 namespace frontend\controllers;
 
-use Yii;
-use yii\base\InvalidParamException;
-use yii\web\BadRequestHttpException;
+use frontend\models\PayPalModel;
 use yii\web\Controller;
-use yii\filters\VerbFilter;
-use yii\filters\AccessControl;
-use common\models\LoginForm;
-use common\components\PayPal;
-use frontend\models\PasswordResetRequestForm;
-use frontend\models\ResetPasswordForm;
-use frontend\models\SignupForm;
-use frontend\models\ContactForm;
+
 /**
- * Site controller
+ * Class PayPalController
  */
+
 class InvestController extends Controller
 {
-    /**
-     * @inheritdoc
-     */
-  
 
     /**
-     * Displays homepage.
-     *
-     * @return mixed
+     * @return string
      */
-
     public function actionIndex()
     {
        
-       return $this->render('index');
+        $model = new PayPalModel();
+        $model->setScenario(PayPalModel::SCENARIO_PAY);
+        if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
+            $currency = PayPalModel::$currencies[$model->currency];
+            $amount = $model->amount;
+            $transactionData = \Yii::$app->paypal->getTransactionToken($amount, $currency);
+            if ($transactionData['ACK'] == 'Success') {
+                \Yii::$app->paypal->goToExpressCheckout($transactionData['TOKEN']);
+            } else {
+                return $this->redirect(['error']);
+            }
+        }
+
+        $viewData = [
+            'model' => $model
+        ];
+
+        return $this->render('index', $viewData);
     }
 
+    /**
+     * @return string
+     */
+    public function actionSuccess()
+    {
+        $token = $this->getToken();
+        if ($token) {
+
+            $data = \Yii::$app->paypal->getDetails($token);
+            if ($data) {
+                $token = $this->getToken($data);
+
+                $amt = isset($data['PAYMENTREQUEST_0_AMT']) ? $data['PAYMENTREQUEST_0_AMT'] : 0;
+                $payerId = isset($data['PAYERID']) ? $data['PAYERID'] : 0;
+                $currency = isset($data['PAYMENTREQUEST_0_CURRENCYCODE']) ? $data['PAYMENTREQUEST_0_CURRENCYCODE'] : 0;
+
+                if (!$amt && !$payerId && !$currency && !$token) {
+                    return $this->render('error');
+                }
+
+                $confirmData = \Yii::$app->paypal->confirm($token, $payerId, $amt, $currency);
+                if (isset($confirmData['ACK']) && $confirmData['ACK'] == 'Success') {
+                    return $this->render('success', ['data' => $confirmData]);
+                }
+            }
+        }
+
+        return $this->render('error');
+    }
 
 
     /**
-     * Logs out the current user.
-     *
-     * @return mixed
+     * @return string
      */
-    public function actionLogout()
+    public function actionError()
     {
-        Yii::$app->user->logout();
-
-        return $this->goHome();
+        $token = $this->getToken();
+        return $this->render('error', ['token' => $token]);
     }
 
+
+    /**
+     * @param array $data
+     * @return array|int|mixed
+     */
+    private function getToken($data = [])
+    {
+        if ($data) {
+            $token = isset($data['TOKEN']) ? $data['TOKEN'] : 0;
+            if (!$token) {
+                $token = isset($data['token']) ? $data['token'] : 0;
+            }
+        } else {
+            $token = \Yii::$app->request->get('TOKEN', 0);
+            if (!$token) {
+                $token = \Yii::$app->request->get('token', 0);
+            }
+        }
+
+
+        return $token;
+    }
 }

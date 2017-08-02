@@ -8,93 +8,47 @@
     use yii\widgets\Breadcrumbs;
 
 
-    AppAsset::register($this);
-    $this->beginPage();
+include "components/head_profile.php";
 ?>
-<!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
-<head>
-    <meta charset="<?= Yii::$app->charset ?>">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
-</head>
-<body>
+
 
 <?php $this->beginBody() ?>
 
 
-<div class="profile-user-model-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+<div class="all_admin">
+<aside>
+  <div class="logo">
+    <a href="/"><img src="img/logo.jpg"></a>
+  </div>
+  <ul>
+    <li>
+      <a href="../">
+        <img src="img/quit.png" alt=""> Back to Home Page
+      </a>
+    </li>
 
-    <div class="wrap">
+    <li>
+      <a href="/profile">
+        <img src="img/quit.png" alt=""> Profile
+      </a>
+    </li>
 
-         <?php
-        NavBar::begin([
-            'brandLabel' => 'XCapital',
-            'brandUrl' => Yii::$app->homeUrl,
-            'options' => [
-                'class' => 'navbar-inverse navbar-fixed-top',
-            ],
-        ]);
-        $menuItems = [
-            ['label' => 'Home', 'url' => ['/site/index']],
-            ['label' => 'About', 'url' => ['/site/about']],
-            ['label' => 'Contact', 'url' => ['/site/contact']],
-        ];
-        if (Yii::$app->user->isGuest) {
-            $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-            $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-        } else {
-            $menuItems[] = '<li>'
-                . Html::beginForm(['/site/logout'], 'post')
-                . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link logout']
-                )
-                . Html::endForm()
-                . '</li>';
-        }
-        echo Nav::widget([
-            'options' => ['class' => 'navbar-nav navbar-right'],
-            'items' => $menuItems,
-        ]);
-        NavBar::end();
-        ?>
+    <li>
+      <a href="/invest">
+        <img src="img/quit.png" alt=""> Invest
+      </a>
+    </li>
+  </ul>
+  
+</aside>
 
-          <div class="container">
-        <?= Breadcrumbs::widget([
-            'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
-        ]) ?>
-        <?= Alert::widget() ?>
-       
-    </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-md-2">
-                <div class="sidebar" id="sidebar">
-                    <ul class="nav nav-list">
-                        <li>
-                            <a href="/profile">
-                                <i class="icon-question"></i>
-                                <span class="menu-text">My account</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/invest">
-                                <i class="icon-question"></i>
-                                <span class="menu-text">Make invest</span>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="col-md-10">
+<section>
+<div class="wrap">
+  <div class="adm-containter section-content">
+    <div class="personal">
+     
+        <div class="col-md-10">
                 <?php
                 /* @var $this yii\web\View */
                 /* @var $searchModel frontend\models\profile\ProfileUserSearchModel */
@@ -105,36 +59,43 @@
                 ?>
 
 
-                    <?= GridView::widget([
-                        'dataProvider' => $dataProvider,
-                      
-                        'layout'=>"{items}",
-                        'columns' => [
-                           
-                            'username',
-                            'email:email',
-                            'perfectMoney',
-                            'peyeer',
-                            'bitcoin',
-                            'qiwi',
-                            'yandex',
+                <?= GridView::widget([
+                    'dataProvider' => $dataProvider,
+                  
+                    'layout'=>"{items}",
+                    'columns' => [
+                       
+                        'username',
+                        'email:email',
+                        'perfectMoney',
+                        'peyeer',
+                        'bitcoin',
+                        'qiwi',
+                        'yandex',
 
-                            [
-                                'class' => 'yii\grid\ActionColumn',
-                                'template' => '{update}',
-                            ],
+                        [
+                            'class' => 'yii\grid\ActionColumn',
+                            'template' => '{update}',
                         ],
-                    ]); ?>
+                    ],
+                ]); ?>
 
             </div>
 
-        </div>
     </div>
+  </div>
 </div>
+</section>
 
 
 </div>
+<footer class="footer">
+    <div class="container">
+        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
 
+        <p class="pull-right"><?= Yii::powered() ?></p>
+    </div>
+</footer>
 
 <?php $this->endBody() ?>
 </body>
