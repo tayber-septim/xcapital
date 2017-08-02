@@ -50,14 +50,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
                 <?=  $form->field($model, 'perfectMoney') ?>
 
-                <?=  $form->field($model, 'peyeer') ?>
-
-                <?=  $form->field($model, 'bitcoin') ?>
-
-                <?=  $form->field($model, 'qiwi') ?>
-                
-                <?=  $form->field($model, 'yandex') ?>
-
                 <div class="form-group">
                     <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
                 </div>

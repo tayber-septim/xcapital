@@ -12,6 +12,7 @@ use frontend\models\PasswordResetRequestForm;
 use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
+use yii\helpers\Url;
 
 /**
  * Site controller
@@ -88,7 +89,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
+            return  Yii::$app->response->redirect(Url::to('/profile'));
         } else {
             return $this->render('login', [
                 'model' => $model,
@@ -152,7 +153,7 @@ class SiteController extends Controller
         if ($model->load(Yii::$app->request->post())) {
             if ($user = $model->signup()) {
                 if (Yii::$app->getUser()->login($user)) {
-                    return $this->goHome();
+                    return Yii::$app->response->redirect(Url::to('/profile'));
                 }
             }
         }

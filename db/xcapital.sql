@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jul 31, 2017 at 09:48 AM
+-- Generation Time: Aug 02, 2017 at 01:36 PM
 -- Server version: 5.7.19-0ubuntu0.16.04.1
 -- PHP Version: 7.0.18-0ubuntu0.16.04.1
 
@@ -54,16 +54,21 @@ CREATE TABLE `user` (
   `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `status` smallint(6) NOT NULL DEFAULT '10',
   `created_at` int(11) NOT NULL,
-  `updated_at` int(11) NOT NULL
+  `updated_at` int(11) NOT NULL,
+  `perfectMoney` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `peyeer` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `bitcoin` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `qiwi` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `yandex` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`) VALUES
-(1, 'evalon', 'D7tKNXUYLVaLD48IDRBbAHi6hqRcqorm', '$2y$13$j7I.lYlGwiciWiuaqJqbwufrJSYKEwdax4/cXks2m71Jf72N7AX7O', 'yyaiip1uTBRYWsioOlpRI8ytcCQdfgnQ_1501472933', 'evalonnn@mail.ru', 10, 1501472109, 1501472933),
-(2, 'test', 'Bx_LPxvgvz1Bz43PMff-u1Z0-q_rl0x-', '$2y$13$VhR4wiJuEttkb2HchCVKAOt/ICsg3QI3.qoeuC151H3bEFW9l8qUu', NULL, 'tet@tet.ru', 10, 1501473085, 1501473085);
+INSERT INTO `user` (`id`, `username`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `status`, `created_at`, `updated_at`, `perfectMoney`, `peyeer`, `bitcoin`, `qiwi`, `yandex`) VALUES
+(4, 'evalon', '6oOwx1g_6abHK-i4E8uRYbq8R_wuSCi0', '$2y$13$dIG5YEFsHfcazF0NAY/PKe8owwYLLL4Uo7ocxdubxqGz.fSy4slxq', '', 'evalonnn@mail.ru', 10, 1501489123, 1501489123, 'moneymoney', 'test peyeer', 'test bitcoin', 'test qiwi', 'test yandex'),
+(5, 'test', 'FHtTGiLV_bKhS5cViY4qKzFEnqumWOV4', '$2y$13$GIvj1YV7ZHWhVjFGU.DcdO8Hw.Luvuwgtgf6Zn6U1NX./onrD5BLq', NULL, 'tet@we.ew', 10, 1501514129, 1501514129, 'wrwe', 'wer', 'wer', 'wer', 'wer');
 
 --
 -- Indexes for dumped tables
@@ -92,7 +97,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
