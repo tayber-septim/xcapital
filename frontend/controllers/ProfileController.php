@@ -8,6 +8,7 @@ use frontend\models\profile\ProfileUserSearchModel;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\data\ActiveDataProvider;
 
 /**
  * ProfileController implements the CRUD actions for ProfileUserModel model.
@@ -35,11 +36,14 @@ class ProfileController extends Controller
      */
     public function actionIndex()
     {
-        
-        $searchModel = new ProfileUserSearchModel();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $id = Yii::$app->user->id;
+
+         $dataProvider = new ActiveDataProvider([
+            'query' => ProfileUserModel::find()->where("id = $id"),
+            'pagination' => false,
+        ]);
+
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }

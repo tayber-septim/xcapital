@@ -12,12 +12,47 @@ use yii\widgets\Breadcrumbs;
 use frontend\assets\AppAsset;
 use common\widgets\Alert;  
 use yii\bootstrap\ActiveForm;
+use yii\data\ActiveDataProvider;
+use frontend\models\MakeInvestsModel;
+use yii\widgets\ListView;
+
 // подключаем Шапку html разметки
 include "components/head_profile.php";
 ?>
 
 <?php $this->beginBody() ?>
-
+ <?php
+    NavBar::begin([
+        'brandLabel' => 'XCapital',
+        'brandUrl' => Yii::$app->homeUrl,
+        'options' => [
+            'class' => 'navbar-inverse navbar-fixed-top',
+        ],
+    ]);
+    $menuItems = [
+        ['label' => 'Home', 'url' => ['/site/index']],
+        ['label' => 'About', 'url' => ['/site/about']],
+        ['label' => 'Contact', 'url' => ['/site/contact']],
+    ];
+    if (Yii::$app->user->isGuest) {
+        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
+        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
+    } else {
+        $menuItems[] = '<li>'
+            . Html::beginForm(['/site/logout'], 'post')
+            . Html::submitButton(
+                'Logout (' . Yii::$app->user->identity->username . ')',
+                ['class' => 'btn btn-link logout']
+            )
+            . Html::endForm()
+            . '</li>';
+    }
+    echo Nav::widget([
+        'options' => ['class' => 'navbar-nav navbar-right'],
+        'items' => $menuItems,
+    ]);
+    NavBar::end();
+    ?>
 <div class="section_name">
     <div class="adm-containter">
       <h2>SIGN IN</h2>
@@ -52,6 +87,11 @@ include "components/head_profile.php";
         <img src="img/quit.png" alt=""> Invest
       </a>
     </li>
+    <li>
+      <a href="/make-invest">
+        <img src="img/quit.png" alt=""> Make invest
+      </a>
+    </li>
   </ul>
   
 </aside>
@@ -60,7 +100,21 @@ include "components/head_profile.php";
 <div class="wrap">
   <div class="adm-containter section-content">
     <div class="personal">
-     
+     <?php
+                $dataProvider = new ActiveDataProvider([
+
+                    'query' => MakeInvestsModel::find(),
+                    'pagination' => [
+                        'pageSize' => 20,
+                    ],
+                ]);
+                 
+                echo ListView::widget([
+                  'layout'=>"{items}",
+                    'dataProvider' => $dataProvider,
+                    'itemView' => '_list',
+                ]);
+            ?>
        <div>PayPal</div>
          <div class="site-login">
               <h1><?= Html::encode($this->title) ?></h1>
@@ -75,7 +129,7 @@ include "components/head_profile.php";
 
               <?= $form->field($model, 'amount'); ?>
               <?= $form->field($model, 'currency')->dropDownList(\frontend\models\PayPalModel::$currencies); ?>
-              <?= $form->field($model, 'description')->textarea(); ?>
+             <!--  <?= $form->field($model, 'description')->textarea(); ?> -->
 
               <div class="form-group">
                   <div class="col-lg-offset-1 col-lg-11">

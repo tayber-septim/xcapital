@@ -70,4 +70,5 @@ class ProfileUserModel extends \yii\db\ActiveRecord
             'yandex' => 'Yandex',
         ];
     }
+
 }

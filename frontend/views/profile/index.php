@@ -1,11 +1,12 @@
 <?php 
-    use yii\helpers\Html;
-    use yii\grid\GridView;
-    use frontend\assets\AppAsset;
-    use yii\bootstrap\Nav;
-    use yii\bootstrap\NavBar;
-    use common\widgets\Alert;   
-    use yii\widgets\Breadcrumbs;
+  use yii\helpers\Html;
+  use yii\grid\GridView;
+  use frontend\assets\AppAsset;
+  use yii\bootstrap\Nav;
+  use yii\bootstrap\NavBar;
+  use common\widgets\Alert;   
+  use yii\widgets\Breadcrumbs;
+
 
 
 include "components/head_profile.php";
@@ -39,14 +40,20 @@ include "components/head_profile.php";
         <img src="img/quit.png" alt=""> Invest
       </a>
     </li>
+    <li>
+      <a href="/make-invest">
+        <img src="img/quit.png" alt=""> Make invest
+      </a>
+    </li>
   </ul>
   
 </aside>
 
 <section>
-<div class="wrap">
+
   <div class="adm-containter section-content">
-    <div class="personal">
+    <div class="peronal">
+
      
         <div class="col-md-10">
                 <?php
@@ -58,33 +65,35 @@ include "components/head_profile.php";
                 $this->params['breadcrumbs'][] = $this->title;
                 ?>
 
+                <?= 
+                  GridView::widget([
+                      'dataProvider' => $dataProvider,
+                      'layout'=>"{items}",
+                      'columns' => [
 
-                <?= GridView::widget([
-                    'dataProvider' => $dataProvider,
-                  
-                    'layout'=>"{items}",
-                    'columns' => [
-                       
-                        'username',
-                        'email:email',
-                        'perfectMoney',
-                        'peyeer',
-                        'bitcoin',
-                        'qiwi',
-                        'yandex',
+                          'username',
+                          'email:email',
+                          'perfectMoney',
+                          'peyeer',
+                          'bitcoin',
+                          'qiwi',
+                          'yandex',
 
-                        [
-                            'class' => 'yii\grid\ActionColumn',
-                            'template' => '{update}',
-                        ],
-                    ],
-                ]); ?>
+                          [
+                              'class' => 'yii\grid\ActionColumn',
+                              'template' => '{update}',
+                          ],
+                      ],
+                  ]); 
+
+                ?> 
+
 
             </div>
 
     </div>
   </div>
-</div>
+
 </section>
 
 

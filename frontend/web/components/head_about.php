@@ -42,10 +42,11 @@ $link_all = '';
 	<meta name="keywords" content="" />
 	<meta name="author" content="Web-Prisma" />
 	<link rel="shortcut icon" href="<?php echo($link_all);?>/images/favicon.ico"> 
-	<link rel="stylesheet" type="text/css" href="<?php echo($link_all);?>/css/materialize.min.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo($link_all);?>/css/main.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo($link_all);?>/css/materialize.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo($link_all);?>/css/style.css" />
 	<link rel="stylesheet" type="text/css" href="<?php echo($link_all);?>/css/font-awesome.min.css" />
+	<link rel="stylesheet" type="text/css" href="<?php echo($link_all);?>/css/about_us.css" />
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700" rel="stylesheet" type="text/css">
 
 	<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>

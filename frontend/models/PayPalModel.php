@@ -27,9 +27,9 @@ class PayPalModel extends Model
     public function rules()
     {
         return [
-            [['description', 'currency', 'amount'], 'required', 'on' => [self::SCENARIO_PAY]],
+            [['currency', 'amount'], 'required', 'on' => [self::SCENARIO_PAY]],
             ['amount', 'number', 'on' => [self::SCENARIO_PAY]],
-            ['description', 'string', 'on' => [self::SCENARIO_PAY]],
+            // ['description', 'string', 'on' => [self::SCENARIO_PAY]],
             ['currency', 'in', 'range' => array_keys(self::$currencies), 'on' => [self::SCENARIO_PAY]]
         ];
     }

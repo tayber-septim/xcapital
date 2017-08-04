@@ -1,74 +1,86 @@
+<?php 
+    use yii\helpers\Html;
+    use yii\grid\GridView;
+    use frontend\assets\AppAsset;
+    use yii\bootstrap\Nav;
+    use yii\bootstrap\NavBar;
+    use common\widgets\Alert;   
+    use yii\widgets\Breadcrumbs;
+    use yii\bootstrap\ActiveForm;
 
-<?php
-
-/* @var $this yii\web\View */
-/* @var $form yii\bootstrap\ActiveForm */
-/* @var $model \common\models\LoginForm */
-
-use yii\bootstrap\Nav;
-use yii\bootstrap\NavBar;
-use common\widgets\Alert;
-
-use yii\bootstrap\ActiveForm;
-use frontend\assets\AppAsset;
-use yii\helpers\Html;
-use yii\widgets\Breadcrumbs;
-
-AppAsset::register($this);
+include "components/head_login.php";
 ?>
-<?php $this->beginPage() ?>
-<!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
-<head>
-    <meta charset="<?= Yii::$app->charset ?>">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?= Html::csrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
-</head>
-<body>
-<?php
-$this->beginBody();
 
-$this->title = 'Login';
-$this->params['breadcrumbs'][] = $this->title;
-?>
-<div class="site-login">
-    <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>Please fill out the following fields to login:</p>
-
-    <div class="row">
-        <div class="col-lg-5">
-            <?php $form = ActiveForm::begin(['id' => 'login-form']); ?>
-
-                <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-
-                <?= $form->field($model, 'password')->passwordInput() ?>
-
-                <?= $form->field($model, 'rememberMe')->checkbox() ?>
-
-                <div style="color:#999;margin:1em 0">
-                    If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset']) ?>.
-                </div>
-
-                <div class="form-group">
-                    <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-                </div>
-
-            <?php ActiveForm::end(); ?>
-        </div>
-    </div>
+<?php $this->beginBody() ?>
+<div class="section_name">
+    <div class="adm-containter">
+      <h2>LOG IN</h2>
+      <div class="login">
+       <a href="sign_in.php">SIGN IN</a>
+       
+      </div>
+    </div> 
 </div>
 
-<footer class="footer">
-    <div class="container">
-        <p class="pull-left">&copy; XCapital <?= date('Y') ?></p>
+<div class="all_admin">
+    <aside>
+      <div class="logo">
+        <a href="/"><img src="img/logo.jpg"></a>
+      </div>
+      <ul>
+        <li>
+          <a href="/">
+            <img src="img/quit.png" alt=""> Back to Home Page
+          </a>
+        </li>
+      </ul>
+      
+    </aside>
+    <section>
+        <div class="adm-containter section-content">
+          <div class="personal">
+                    <?php 
+                    $form = ActiveForm::begin(['id' => 'login-form',
+                        'options' => ['class' => '','wrapper' => ''],
+                        
+                        'fieldConfig' => [
+                           
+                            'template' => "{input}",
+                            'labelOptions' => ['class' => ''],
+                            'options' => ['class' => 'war'],
+                        ],
+                    ]); ?>
 
-        <p class="pull-right"><?= Yii::powered() ?></p>
-    </div>
-</footer>
+                        <h6>LOGIN TO YOUR ACCOUNT</h6><br>
+
+                      
+
+                      <?= $form->field($model, 'username',[
+                            'inputTemplate' => '{input}',
+
+
+                      ])->textInput(['autofocus' => true]) ?> 
+
+                        <?= $form->field($model, 'password')->passwordInput() ?> 
+<!-- 
+                        <?= $form->field($model, 'rememberMe')->checkbox([
+                            'class'=>'example',
+                        ])->label('Запомнить') ?> -->
+
+                     <!--    <div style="color:#999;margin:1em 0">
+                            If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset']) ?> 
+                        </div> -->
+
+                        
+                        <?= Html::submitButton('Login', ['class' => 'btn  submit', 'name' => 'login-button']) ?> 
+                        
+
+                    <?php ActiveForm::end(); ?>
+            </div>
+        </div>
+    </section>
+</div>
 
 <?php $this->endBody() ?>
 </body>
