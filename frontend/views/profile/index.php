@@ -15,34 +15,32 @@ include "components/head_profile.php";
 
 <?php $this->beginBody() ?>
 
-
+<div class="section_name">
+    <div class="adm-containter">
+      <h2><?= Yii::$app->user->identity->username ?></h2>
+   
+    </div> 
+</div>
 
 <div class="all_admin">
 <aside>
   <div class="logo">
-    <a href="/"><img src="img/logo.jpg"></a>
+    <a href="/"><img src="/img/logo.jpg"></a>
   </div>
   <ul>
     <li>
-      <a href="../">
-        <img src="img/quit.png" alt=""> Back to Home Page
+      <a href="/">
+        <img src="/img/quit.png" alt=""> Back to Home Page
       </a>
-    </li>
-
+    </li> 
     <li>
       <a href="/profile">
-        <img src="img/quit.png" alt=""> Profile
+        <img src="/img/quit.png" alt=""> Profile
       </a>
-    </li>
-
+    </li> 
     <li>
       <a href="/invest">
-        <img src="img/quit.png" alt=""> Invest
-      </a>
-    </li>
-    <li>
-      <a href="/make-invest">
-        <img src="img/quit.png" alt=""> Make invest
+        <img src="/img/quit.png" alt=""> Invest
       </a>
     </li>
   </ul>
@@ -50,49 +48,29 @@ include "components/head_profile.php";
 </aside>
 
 <section>
+<div class="adm-containter section-content">
+  <div class="personal">
+   
+   
+        <h6>PERSONAL INFORMATION</h6><br>
 
-  <div class="adm-containter section-content">
-    <div class="peronal">
+      <input type="text" name="name" value="<?= Yii::$app->user->identity->username ?>"><br>
+      <input type="text" name="username" value="<?= Yii::$app->user->identity->email ?>"><br><br>
 
-     
-        <div class="col-md-10">
-                <?php
-                /* @var $this yii\web\View */
-                /* @var $searchModel frontend\models\profile\ProfileUserSearchModel */
-                /* @var $dataProvider yii\data\ActiveDataProvider */
+      <div class="second_form">
 
-                $this->title = 'Редактирование информации';
-                $this->params['breadcrumbs'][] = $this->title;
-                ?>
+        <h6>E-CURREncies</h6><br>
+        <input type="text" name="money_acc" value="<?= Yii::$app->user->identity->perfectMoney ?>" ><br>
+        <input type="text" name="pay_acc" value="<?= Yii::$app->user->identity->peyeer ?>"><br>
+        <input type="text" name="bit_acc" value="<?= Yii::$app->user->identity->bitcoin ?>"><br>
+        <input type="text" name="qiwi_acc" value="<?= Yii::$app->user->identity->qiwi ?>"><br>
+        <input type="text" name="yand_acc" value="<?= Yii::$app->user->identity->yandex ?>"><br>
 
-                <?= 
-                  GridView::widget([
-                      'dataProvider' => $dataProvider,
-                      'layout'=>"{items}",
-                      'columns' => [
-
-                          'username',
-                          'email:email',
-                          'perfectMoney',
-                          'peyeer',
-                          'bitcoin',
-                          'qiwi',
-                          'yandex',
-
-                          [
-                              'class' => 'yii\grid\ActionColumn',
-                              'template' => '{update}',
-                          ],
-                      ],
-                  ]); 
-
-                ?> 
-
-
-            </div>
-
-    </div>
+      </div>
+      
+  
   </div>
+</div>
 
 </section>
 

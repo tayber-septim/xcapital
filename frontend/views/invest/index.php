@@ -21,75 +21,34 @@ include "components/head_profile.php";
 ?>
 
 <?php $this->beginBody() ?>
- <?php
-    NavBar::begin([
-        'brandLabel' => 'XCapital',
-        'brandUrl' => Yii::$app->homeUrl,
-        'options' => [
-            'class' => 'navbar-inverse navbar-fixed-top',
-        ],
-    ]);
-    $menuItems = [
-        ['label' => 'Home', 'url' => ['/site/index']],
-        ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']],
-    ];
-    if (Yii::$app->user->isGuest) {
-        $menuItems[] = ['label' => 'Signup', 'url' => ['/site/signup']];
-        $menuItems[] = ['label' => 'Login', 'url' => ['/site/login']];
-    } else {
-        $menuItems[] = '<li>'
-            . Html::beginForm(['/site/logout'], 'post')
-            . Html::submitButton(
-                'Logout (' . Yii::$app->user->identity->username . ')',
-                ['class' => 'btn btn-link logout']
-            )
-            . Html::endForm()
-            . '</li>';
-    }
-    echo Nav::widget([
-        'options' => ['class' => 'navbar-nav navbar-right'],
-        'items' => $menuItems,
-    ]);
-    NavBar::end();
-    ?>
+
 <div class="section_name">
     <div class="adm-containter">
-      <h2>SIGN IN</h2>
+      <h2><?= Yii::$app->user->identity->username ?></h2>
      <h4 style="font-weight: bold;color: #c00;"> </h4>
-      <div class="login">
-       <a href="login.php">login</a>
-       
-      </div>
+      
     </div> 
 </div>
 
 <div class="all_admin">
 <aside>
   <div class="logo">
-    <a href="/"><img src="img/logo.jpg"></a>
+    <a href="/"><img src="/img/logo.jpg"></a>
   </div>
   <ul>
     <li>
-      <a href="../">
-        <img src="img/quit.png" alt=""> Back to Home Page
+      <a href="/">
+        <img src="/img/quit.png" alt=""> Back to Home Page
       </a>
-    </li>
-
+    </li> 
     <li>
       <a href="/profile">
-        <img src="img/quit.png" alt=""> Profile
+        <img src="/img/quit.png" alt=""> Profile
       </a>
-    </li>
-
+    </li> 
     <li>
       <a href="/invest">
-        <img src="img/quit.png" alt=""> Invest
-      </a>
-    </li>
-    <li>
-      <a href="/make-invest">
-        <img src="img/quit.png" alt=""> Make invest
+        <img src="/img/quit.png" alt=""> Invest
       </a>
     </li>
   </ul>

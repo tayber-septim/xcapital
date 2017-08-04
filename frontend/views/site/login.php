@@ -17,7 +17,7 @@ include "components/head_login.php";
     <div class="adm-containter">
       <h2>LOG IN</h2>
       <div class="login">
-       <a href="sign_in.php">SIGN IN</a>
+       <a href="/site/signup">SIGN UP</a>
        
       </div>
     </div> 
@@ -26,7 +26,7 @@ include "components/head_login.php";
 <div class="all_admin">
     <aside>
       <div class="logo">
-        <a href="/"><img src="img/logo.jpg"></a>
+        <a href="/"><img src="/img/logo.jpg"></a>
       </div>
       <ul>
         <li>
@@ -60,9 +60,9 @@ include "components/head_login.php";
                             'inputTemplate' => '{input}',
 
 
-                      ])->textInput(['autofocus' => true]) ?> 
+                      ])->textInput(['autofocus' => true])->textInput(['placeholder'=>"username"]) ?> 
 
-                        <?= $form->field($model, 'password')->passwordInput() ?> 
+                        <?= $form->field($model, 'password')->passwordInput()->textInput(['placeholder'=>"password"]) ?> 
 <!-- 
                         <?= $form->field($model, 'rememberMe')->checkbox([
                             'class'=>'example',
@@ -72,9 +72,8 @@ include "components/head_login.php";
                             If you forgot your password you can <?= Html::a('reset it', ['site/request-password-reset']) ?> 
                         </div> -->
 
-                        
-                        <?= Html::submitButton('Login', ['class' => 'btn  submit', 'name' => 'login-button']) ?> 
-                        
+                        <input type="checkbox" class="checkbox" name="condition"> 
+                        <input type="submit" class="submit" name="signinbtn" value="sign in">
 
                     <?php ActiveForm::end(); ?>
             </div>

@@ -8,7 +8,7 @@
     use yii\widgets\Breadcrumbs;
     use yii\bootstrap\ActiveForm;
 
-include "components/head_login.php";
+    include "components/head_login.php";
 ?>
 
 
@@ -18,7 +18,7 @@ include "components/head_login.php";
     <div class="adm-containter">
       <h2>LOG IN</h2>
       <div class="login">
-       <a href="sign_in.php">SIGN IN</a>
+       <a href="/site/login">Log in</a>
        
       </div>
     </div> 
@@ -27,7 +27,7 @@ include "components/head_login.php";
 <div class="all_admin">
 <aside>
   <div class="logo">
-    <a href="../"><img src="img/logo.jpg"></a>
+    <a href="../"><img src="/img/logo.jpg"></a>
   </div>
   <ul>
     <li>
@@ -45,27 +45,34 @@ include "components/head_login.php";
    
    <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
     
-    <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+    <p>PERSONAL INFORMATION</p>
+    <br>
 
-    <?=  $form->field($model, 'email') ?>
+    <?= $form->field($model, 'username')->textInput(['autofocus' => false,'placeholder'=>"Your Full Name"])->label(false) ?>
 
-    <?= $form->field($model, 'password')->passwordInput() ?>
+    <?=  $form->field($model, 'email')->textInput(['placeholder'=>"Your E-mail Address"])->label(false) ?>
+
+    <?= $form->field($model, 'password')->passwordInput()->textInput(['placeholder'=>"Your Password"])->label(false) ?>
 
     <p>E-CURRENCIES</p>
 
-    <?=  $form->field($model, 'perfectMoney') ?>
+    <br>
 
-    <?=  $form->field($model, 'peyeer') ?>
+    <?=  $form->field($model, 'perfectMoney')->textInput(['placeholder'=>"Your PerfectMoney Account"])->label(false) ?>
 
-    <?=  $form->field($model, 'bitcoin') ?>
+    <?=  $form->field($model, 'peyeer')->textInput(['placeholder'=>"Your Payeer Account"])->label(false) ?>
 
-    <?=  $form->field($model, 'qiwi') ?>
+    <?=  $form->field($model, 'bitcoin')->textInput(['placeholder'=>"Your Bitcoin Account"])->label(false) ?>
+
+    <?=  $form->field($model, 'qiwi')->textInput(['placeholder'=>"Your Qiwi Account"])->label(false) ?>
     
-    <?=  $form->field($model, 'yandex') ?>
+    <?=  $form->field($model, 'yandex')->textInput(['placeholder'=>"Your YandexMoney Account"])->label(false) ?>
 
-    <div class="form-group">
-        <?= Html::submitButton('Signup', ['class' => 'btn btn-primary', 'name' => 'signup-button']) ?>
-    </div>
+<!--         <?= Html::submitButton('Signup', ['class' => 'btn btn-primary submit', 'name' => 'signup-button']) ?> -->
+        <input type="checkbox" class="checkbox" name="condition"> 
+        <label for="checkbox">I agree with Term & Conditions</label>
+       <input type="submit" class="submit" name="signinbtn" value="sign in">
+  
 
 <?php ActiveForm::end(); ?>
 
