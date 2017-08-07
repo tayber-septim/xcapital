@@ -4,6 +4,9 @@ namespace frontend\controllers;
 
 use frontend\models\PayPalModel;
 use yii\web\Controller;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
+
 
 /**
  * Class PayPalController
@@ -15,9 +18,29 @@ class InvestController extends Controller
     /**
      * @return string
      */
+
+
+    public function behaviors(){
+
+        return [
+        'access' => [
+        'class' => AccessControl::className(),
+        'only' => ['index'],
+        
+        'rules' => [
+        [
+        'actions' => ['index'],
+        'allow' => true,
+        'roles' => ['@'],
+        ],
+        ],
+        ],
+        ];
+    }
+
     public function actionIndex()
     {
-       
+     
         $model = new PayPalModel();
         $model->setScenario(PayPalModel::SCENARIO_PAY);
         if ($model->load(\Yii::$app->request->post()) && $model->validate()) {
@@ -32,7 +55,7 @@ class InvestController extends Controller
         }
 
         $viewData = [
-            'model' => $model
+        'model' => $model
         ];
 
         return $this->render('index', $viewData);

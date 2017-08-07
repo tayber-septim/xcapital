@@ -9,6 +9,8 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\data\ActiveDataProvider;
+use yii\filters\AccessControl;
+
 
 /**
  * ProfileController implements the CRUD actions for ProfileUserModel model.
@@ -18,18 +20,23 @@ class ProfileController extends Controller
     /**
      * @inheritdoc
      */
-    public function behaviors()
-    {
+    public function behaviors(){
+
         return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
+            'access' => [
+                'class' => AccessControl::className(),
+                'only' => ['index'],
+                
+                'rules' => [
+                    [
+                        'actions' => ['index'],
+                        'allow' => true,
+                        'roles' => ['@'],
+                    ],
                 ],
             ],
         ];
     }
-
     /**
      * Lists all ProfileUserModel models.
      * @return mixed

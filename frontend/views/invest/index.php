@@ -1,4 +1,4 @@
-<?php 
+<?php
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
 /* @var $model app\models\LoginForm */
@@ -25,36 +25,16 @@ include "components/head_profile.php";
 <div class="section_name">
     <div class="adm-containter">
       <h2><?= Yii::$app->user->identity->username ?></h2>
-     <h4 style="font-weight: bold;color: #c00;"> </h4>
+      <div class="login">
+       <?= Html::a('Logout', ['site/logout'], ['data' => ['method' => 'post']]) ?>
+      </div>
       
     </div> 
 </div>
 
 <div class="all_admin">
-<aside>
-  <div class="logo">
-    <a href="/"><img src="/img/logo.jpg"></a>
-  </div>
-  <ul>
-    <li>
-      <a href="/">
-        <img src="/img/quit.png" alt=""> Back to Home Page
-      </a>
-    </li> 
-    <li>
-      <a href="/profile">
-        <img src="/img/quit.png" alt=""> Profile
-      </a>
-    </li> 
-    <li>
-      <a href="/invest">
-        <img src="/img/quit.png" alt=""> Invest
-      </a>
-    </li>
-  </ul>
-  
-</aside>
-
+ <!-- Подключаем левое меню навигации  -->
+<?php include "components/leftAdminMenu.php" ?>
 <section>
 <div class="wrap">
   <div class="adm-containter section-content">
@@ -73,7 +53,9 @@ include "components/head_profile.php";
                     'dataProvider' => $dataProvider,
                     'itemView' => '_list',
                 ]);
-            ?>
+         ?>
+
+
        <div>PayPal</div>
          <div class="site-login">
               <h1><?= Html::encode($this->title) ?></h1>
