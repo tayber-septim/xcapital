@@ -2,8 +2,9 @@
 
 use yii\db\Migration;
 
-class m130524_201442_init extends Migration
+class m170808_104202_init extends Migration
 {
+
     public function up()
     {
         $tableOptions = null;
@@ -19,6 +20,13 @@ class m130524_201442_init extends Migration
             'password_hash' => $this->string()->notNull(),
             'password_reset_token' => $this->string()->unique(),
             'email' => $this->string()->notNull()->unique(),
+            'user_hash' => $this->string()->unique(),
+
+            'perfectMoney' => $this->string(),
+            'peyeer' => $this->string(),
+            'bitcoin' => $this->string(),
+            'qiwi' => $this->string(),
+            'yandex' => $this->string(),
 
             'status' => $this->smallInteger()->notNull()->defaultValue(10),
             'created_at' => $this->integer()->notNull(),
