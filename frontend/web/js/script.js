@@ -41,4 +41,10 @@ $(document).ready(function($) {
       bottom: 1000,
       offset: 0
     });
+
+	// $sum = document.getElementById("paypalmodel");
+	console.log(1212);
+
+	
+
 });

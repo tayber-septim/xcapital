@@ -23,6 +23,11 @@
         <img src="/img/quit.png" alt=""> My transactions
       </a>
     </li>
+    <li>
+      <a href="/referals">
+        <img src="/img/quit.png" alt=""> My referals
+      </a>
+    </li>
   </ul>
   
 </aside>

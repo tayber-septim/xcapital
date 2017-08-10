@@ -65,6 +65,7 @@ include "components/head_profile.php";
                   'fieldConfig' => [
                       'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
                       'labelOptions' => ['class' => 'col-lg-1 control-label'],
+                      'inputOptions' => ['pattern' => '[0-9]{4,10}'],
                   ],
               ]); ?>
 
@@ -74,7 +75,7 @@ include "components/head_profile.php";
 
               <div class="form-group">
                   <div class="col-lg-offset-1 col-lg-11">
-                      <?= Html::submitButton('pay', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                      <?= Html::submitButton('pay', ['class' => 'btn btn-primary', 'id' => 'btn-primary', 'name' => 'login-button']) ?>
                   </div>
               </div>
               <?php ActiveForm::end(); ?>
@@ -84,6 +85,7 @@ include "components/head_profile.php";
 </div>
 </section>
 
+</section>
 
 </div>
 <footer class="footer">

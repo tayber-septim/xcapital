@@ -2,9 +2,9 @@
 
 use yii\db\Migration;
 
-class m170807_144007_invests extends Migration
+class m170810_080932_invests extends Migration
 {
-    public function safeUp()
+   public function safeUp()
     {
         $tableOptions = null;
         if ($this->db->driverName === 'mysql') {
@@ -15,8 +15,8 @@ class m170807_144007_invests extends Migration
         $this->createTable('{{%invests}}', [
             'id' => $this->primaryKey(),
             'name' => $this->string()->notNull(),
-            'price' => $this->string(),
-            'maxPrice' => $this->string(),
+            'price' => $this->integer(),
+            'maxPrice' => $this->integer(),
             'day' => $this->integer(),
             'take' => $this->integer(),
         ], $tableOptions);
@@ -36,7 +36,7 @@ class m170807_144007_invests extends Migration
 
     public function down()
     {
-        echo "m170807_144007_invests cannot be reverted.\n";
+        echo "m170810_080932_invests cannot be reverted.\n";
 
         return false;
     }

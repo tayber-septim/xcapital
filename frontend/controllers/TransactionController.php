@@ -8,8 +8,10 @@ use frontend\models\TransactionModel;
 
 class TransactionController extends \yii\web\Controller
 {
+
     public function actionIndex()
     {
+
        $id = Yii::$app->user->id;
 
        $dataProvider = new ActiveDataProvider([

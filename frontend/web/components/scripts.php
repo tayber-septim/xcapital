@@ -3,5 +3,5 @@
 <script type="text/livescript" src="/js/materialize.min.js"></script>
 <script type="text/livescript" src="/js/script.js"></script>
 <script type="text/livescript" src="/js/modal.js"></script>
-
+<script type="text/livescript" src="/js/script.js"></script>
 </body>
