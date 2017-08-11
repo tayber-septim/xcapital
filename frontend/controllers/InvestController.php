@@ -110,7 +110,9 @@ class InvestController extends Controller
                     $percent_4 = '4%';
                     $percent_1 = '1%';
 
-                    $con = mysqli_connect("localhost","root","1111","xcapital");
+                    include "components/con.php";
+
+                   
                     $parent = mysqli_query($con ,"SELECT parent , parent_1 , parent_2 FROM `user` WHERE id = '$user_id' ");
 
                     if($parent != ''){

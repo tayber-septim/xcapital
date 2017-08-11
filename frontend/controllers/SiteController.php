@@ -164,7 +164,7 @@ class SiteController extends Controller
                         
                         $user_id = Yii::$app->user->identity->id;
 
-                        $con = mysqli_connect("localhost","root","1111","xcapital");
+                       include "components/con.php";
 
                         // записваем родителя текущему пользователю
 
