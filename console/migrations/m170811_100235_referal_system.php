@@ -17,7 +17,7 @@ class m170811_100235_referal_system extends Migration
             'user_hash' => $this->string(),
             'sum' => $this->float(),
             'invest_name' => $this->string(),
-            'percent' => $this->integer(),
+            'percent' => $this->float(),
         ], $tableOptions);
     }
 
