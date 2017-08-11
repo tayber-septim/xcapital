@@ -41,25 +41,41 @@ include "components/head_profile.php";
     <tbody>
         <tr>
             <?php
+                /* @var $this yii\web\View */
+                /* @var $searchModel frontend\models\profile\ProfileUserSearchModel */
+                /* @var $dataProvider yii\data\ActiveDataProvider */
 
-            for ($i=0;$i<count($parent);$i++){
+                $this->title = 'Редактирование информации';
+                $this->params['breadcrumbs'][] = $this->title;
+                ?>
 
-                 echo "<td>"; 
-                 $parent[$i]['percent'] ;
-                  echo "</td>";
 
-            }
-
-            ?>
+                <?= GridView::widget([
+                    'dataProvider' => $dataProvider,
+                  
+                    'layout'=>"{items}",
+                    'columns' => [
+                       
+                        'sum',
+                        'your_percent',
+                        'percent',
+                        'invest_name',
+                        'user_name',
+                        'user_id',
+                        [
+                            'class' => 'yii\grid\ActionColumn',
+                            'template' => '',
+                        ],
+                    ],
+                ]);
+              ?>
         </tr>
     </tbody>
 </table>
-</div>
-      
+</div>      
   
   </div>
 </div>
-
 
 </section>
 

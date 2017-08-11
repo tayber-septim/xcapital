@@ -2,7 +2,7 @@
 
 use yii\db\Migration;
 
-class m170807_113746_transaction extends Migration
+class m170811_100235_referal_system extends Migration
 {
     public function safeUp()
     {
@@ -12,20 +12,18 @@ class m170807_113746_transaction extends Migration
             $tableOptions = 'CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE=InnoDB';
         }
 
-        $this->createTable('{{%transaction}}', [
+        $this->createTable('{{%referal_system}}', [
             'id' => $this->primaryKey(),
-            'user_id' => $this->integer(),
-            'invest_plan_id' => $this->integer(),
+            'user_hash' => $this->string(),
             'sum' => $this->float(),
             'invest_name' => $this->string(),
-            'created_at' => $this->integer(),
-            'updated_at' => $this->integer(),
+            'percent' => $this->integer(),
         ], $tableOptions);
     }
 
     public function safeDown()
     {
-        $this->dropTable('{{%transaction}}');
+        $this->dropTable('{{%referal_system}}');
 
         return false;
     }
@@ -39,7 +37,7 @@ class m170807_113746_transaction extends Migration
 
     public function down()
     {
-        echo "m170807_113746_transaction cannot be reverted.\n";
+        echo "m170811_100235_referal_system cannot be reverted.\n";
 
         return false;
     }

@@ -5,18 +5,16 @@ namespace frontend\models;
 use Yii;
 
 /**
- * This is the model class for table "transaction".
+ * This is the model class for table "referal_system".
  *
  * @property integer $id
- * @property integer $user_id
- * @property integer $invest_plan_id
+ * @property string $user_hash
  * @property double $sum
  * @property string $invest_name
- * @property string $parent
- * @property string $parent_1
- * @property string $parent_2
- * @property integer $created_at
- * @property integer $updated_at
+ * @property integer $percent
+ * @property string $your_percent
+ * @property string $user_name
+ * @property integer $user_id
  */
 class ReferalSystemModel extends \yii\db\ActiveRecord
 {
@@ -25,7 +23,7 @@ class ReferalSystemModel extends \yii\db\ActiveRecord
      */
     public static function tableName()
     {
-        return 'transaction';
+        return 'referal_system';
     }
 
     /**
@@ -34,9 +32,9 @@ class ReferalSystemModel extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['user_id', 'invest_plan_id', 'created_at', 'updated_at'], 'integer'],
             [['sum'], 'number'],
-            [['invest_name', 'parent', 'parent_1', 'parent_2'], 'string', 'max' => 255],
+            [['percent', 'user_id'], 'integer'],
+            [['user_hash', 'invest_name', 'your_percent', 'user_name'], 'string', 'max' => 255],
         ];
     }
 
@@ -47,15 +45,13 @@ class ReferalSystemModel extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'user_id' => 'User ID',
-            'invest_plan_id' => 'Invest Plan ID',
+            'user_hash' => 'User Hash',
             'sum' => 'Sum',
             'invest_name' => 'Invest Name',
-            'parent' => 'Parent',
-            'parent_1' => 'Parent 1',
-            'parent_2' => 'Parent 2',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
+            'percent' => 'Percent',
+            'your_percent' => 'Your Percent',
+            'user_name' => 'User Name',
+            'user_id' => 'User ID',
         ];
     }
 }
