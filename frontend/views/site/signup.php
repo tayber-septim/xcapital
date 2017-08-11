@@ -42,7 +42,7 @@ include "components/head_login.php";
   <section>
     <div class="adm-containter section-content">
       <div class="personal">
-       
+    
        <?php $form = ActiveForm::begin(['id' => 'form-signup']); ?>
        
        <p>PERSONAL INFORMATION</p>

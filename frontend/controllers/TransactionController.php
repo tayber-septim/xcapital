@@ -18,7 +18,7 @@ class TransactionController extends \yii\web\Controller
         'query' => TransactionModel::find()->where("user_id = $id"),
         'pagination' => false,
         ]);
-
+       // var_dump($dataProvider);exit();
        return $this->render('index', [
         'dataProvider' => $dataProvider,
         ]);

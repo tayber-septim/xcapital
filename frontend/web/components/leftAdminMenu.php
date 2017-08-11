@@ -28,6 +28,11 @@
         <img src="/img/quit.png" alt=""> My referals
       </a>
     </li>
+    <li>
+      <a href="/referal-system">
+        <img src="/img/quit.png" alt=""> Referal system
+      </a>
+    </li>
   </ul>
   
 </aside>
