@@ -8,10 +8,8 @@
   use yii\widgets\Breadcrumbs;
 
 
-
 include "components/head_profile.php";
 ?>
-
 
 <?php $this->beginBody() ?>
 
@@ -31,25 +29,17 @@ include "components/head_profile.php";
 <section>
 <div class="adm-containter section-content">
   <div class="personal">
-   
   
         <h6>Yours referal link</h6><br>
 
         <?php 
-
-      
           echo $link;
-
-        
         ?>
   
   </div>
 </div>
 
-
-
 </section>
-
 
 </div>
 <footer class="footer">

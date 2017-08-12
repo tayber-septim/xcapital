@@ -8,6 +8,8 @@ use frontend\models\MakeInvestsModel;
 use yii\helpers\Url;
 
 use frontend\models\PayPalModel;
+use frontend\models\ReferalSystemModel;
+use frontend\models\TransactionModel;
 use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -99,7 +101,6 @@ class InvestController extends Controller
                         ->from('invests')
                         ->where(['<=' ,'price',"$sum",])
                         ->andWhere(['>=' ,'maxPrice',"$sum",])
-                        ->limit(1)
                         ->all();
 
                     $invest_plan_id = $invest[0]['id'];
@@ -110,43 +111,86 @@ class InvestController extends Controller
                     $percent_4 = '4%';
                     $percent_1 = '1%';
 
-                    include "components/con.php";
+                    
 
                    
-                    $parent = mysqli_query($con ,"SELECT parent , parent_1 , parent_2 FROM `user` WHERE id = '$user_id' ");
+                    // $parent = mysqli_query($con ,"SELECT parent , parent_1 , parent_2 FROM `user` WHERE id = '$user_id' ");
+
+                    $parent = (new \yii\db\Query())
+                        ->select(['parent','parent_1','parent_2'])
+                        ->from('user')
+                        ->where(['id' => "$user_id",])
+                        ->all();
 
                     if($parent != ''){
-                         
-                        while ( $row = mysqli_fetch_assoc( $parent) ) {
+                       
+                        $parent_transact = $parent[0]["parent"];
+                        $parent_1 = $parent[0]["parent_1"];         
+                        $parent_2 = $parent[0]["parent_2"];     
 
-                            $parent_transact = $row["parent"];
-                            $parent_1 = $row["parent_1"];         
-                            $parent_2 = $row["parent_2"];         
-                             
-                        }
+                        // var_dump($parent_transact , $parent_1 , $parent_2);exit();    
 
                         if($parent_transact != ''){
+
                             $sum = $price/100*10; 
-                            $sql = mysqli_query($con ,"INSERT INTO `referal_system` (`user_hash`,`sum`,`percent`,`invest_name`,`user_name`,`user_id`,`your_percent`) VALUES ('$parent_transact','$price','$sum','$invest_name','$user_name','$user_id','$percent_10')"); 
+
+                            $referal = new ReferalSystemModel;
+                            $referal->user_hash = $parent_transact;
+                            $referal->sum = $price;
+                            $referal->percent = $sum;
+                            $referal->invest_name = $invest_name;
+                            $referal->user_name = $user_name;
+                            $referal->user_id = $user_id;
+                            $referal->your_percent = $percent_10;
+                            $referal->insert(); 
 
                         } 
 
                         if($parent_1 != ''){
+
                             $sum = $price/100*4; 
-                            $sql = mysqli_query($con ,"INSERT INTO `referal_system` (`user_hash`,`sum`,`percent`,`invest_name`,`user_name`,`user_id`,`your_percent`) VALUES ('$parent_1','$price','$sum','$invest_name','$user_name','$user_id','$percent_4')"); 
+
+                            $referal = new ReferalSystemModel;
+                            $referal->user_hash = $parent_1;
+                            $referal->sum = $price;
+                            $referal->percent = $sum;
+                            $referal->invest_name = $invest_name;
+                            $referal->user_name = $user_name;
+                            $referal->user_id = $user_id;
+                            $referal->your_percent = $percent_4;
+                            $referal->insert();
 
                         } 
 
                         if($parent_2 != ''){
+
                             $sum = $price/100*1; 
-                            $sql = mysqli_query($con ,"INSERT INTO `referal_system` (`user_hash`,`sum`,`percent`,`invest_name`,`user_name`,`user_id`,`your_percent`) VALUES ('$parent_2','$price','$sum','$invest_name','$user_name','$user_id','$percent_1')"); 
+
+                            $referal = new ReferalSystemModel;
+                            $referal->user_hash = $parent_2;
+                            $referal->sum = $price;
+                            $referal->percent = $sum;
+                            $referal->invest_name = $invest_name;
+                            $referal->user_name = $user_name;
+                            $referal->user_id = $user_id;
+                            $referal->your_percent = $percent_1;
+                            $referal->insert();
 
                         }
 
                     }
 
                     // var_dump($parent_transact ,$parent_1 , $parent_2);exit();
-                    $sql = mysqli_query($con ,"INSERT INTO `transaction` (`user_id`,`invest_plan_id`,`sum`, `invest_name`,`parent`,`parent_1`,`parent_2`) VALUES ('$user_id', '$invest_plan_id', '$price', '$invest_name', '$parent_transact', '$parent_1' , '$parent_2')"); 
+
+                        $transact = new TransactionModel;
+                        $transact->user_id = $user_id;
+                        $transact->invest_plan_id = $invest_plan_id;
+                        $transact->sum = $price;
+                        $transact->invest_name = $invest_name;
+                        $transact->parent = $parent_transact;
+                        $transact->parent_1 = $parent_1;
+                        $transact->parent_2 = $parent_2;
+                        $transact->insert();
 
                     return  Yii::$app->response->redirect(Url::to('/transaction'));
                 }

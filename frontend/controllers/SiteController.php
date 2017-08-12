@@ -13,6 +13,7 @@ use frontend\models\ResetPasswordForm;
 use frontend\models\SignupForm;
 use frontend\models\ContactForm;
 use yii\helpers\Url;
+use frontend\models\profile\ProfileUserModel;
 
 /**
  * Site controller
@@ -164,31 +165,36 @@ class SiteController extends Controller
                         
                         $user_id = Yii::$app->user->identity->id;
 
-                       include "components/con.php";
+                      
 
                         // записваем родителя текущему пользователю
 
-                        $sql = mysqli_query($con ,"UPDATE `user` SET `parent` = '$hash' WHERE id = '$user_id' "); 
+                        $user = ProfileUserModel::findOne($user_id);
+
+                        $user->parent = $hash;
+
+                        $user->save(false);
 
                         // проверяем получилось ли записать
 
-                        if($sql == true){
+                      
 
                             // если все ок , проверяем наличие родителя у текущего родителя
 
-                            $parent = mysqli_query($con ,"SELECT parent FROM `user` WHERE user_hash = '$hash' ");
+                            $parent = (new \yii\db\Query())->select(['parent'])->from('user')->where(['user_hash' => "$hash",])->all();
                             
-                            if($parent != ''){
-                                 
-                                while ( $row = mysqli_fetch_assoc( $parent) ) {
+                            if($parent[0]['parent'] != NULL){
+                   
                                      
-                                    $parent_1 = $row["parent"];
-                                     
-                                }
+                                    $parent_1 = $parent[0]['parent'];  
 
                                 // если существует , записваем его в parent_1 ( будет получать 4% с продаж)
 
-                                $result_parent_1 = mysqli_query($con ,"UPDATE `user` SET `parent_1` = '$parent_1' WHERE id = '$user_id'");
+                                $user = ProfileUserModel::findOne($user_id);
+
+                                $user->parent_1 = $parent_1;
+
+                                $user->save(false);
                                 
                             }else{
 
@@ -197,27 +203,22 @@ class SiteController extends Controller
                                 return Yii::$app->response->redirect(Url::to('/profile'));
                             }
 
-                            $parent_1 = mysqli_query($con ,"SELECT parent_1 FROM `user` WHERE user_hash = '$hash' ");
+                             $parent_1 = (new \yii\db\Query())->select(['parent_1'])->from('user')->where(['user_hash' => "$hash",])->all();
 
-                            if($parent_1 != ''){
-
-                                while ( $row = mysqli_fetch_assoc( $parent_1) ) {
+                            if($parent_1 != ''){ 
                                      
-                                    $parent_2 = $row["parent_1"];
-                                    
-                                }
-                                 // если существует , записваем его в parent_2 ( будет получать 1% с продаж)
+                                $parent_2 = $parent_1[0]["parent_1"];
 
-                                $result_parent_1 = mysqli_query($con ,"UPDATE `user` SET `parent_2` = '$parent_2' WHERE id = '$user_id'");
+                                $user = ProfileUserModel::findOne($user_id);
+
+                                $user->parent_2 = $parent_2;
+
+                                $user->save(false);
+
                             }else{
 
                                 return Yii::$app->response->redirect(Url::to('/profile'));
                             }
-
-                        }else{
-
-                            return Yii::$app->response->redirect(Url::to('/profile'));
-                        }
 
                     }else{
 
@@ -234,24 +235,6 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
-
-    //     public function actionSignup()
-    // {
-   
-    //     $model = new SignupForm();
-    //     if ($model->load(Yii::$app->request->post())) {
-
-    //         if ($user = $model->signup()) {
-    //             if (Yii::$app->getUser()->login($user)) {
-    //                 return Yii::$app->response->redirect(Url::to('/profile'));
-    //             }
-    //         }
-    //     }
-
-    //     return $this->render('signup', [
-    //         'model' => $model,
-    //     ]);
-    // }
 
     /**
      * Requests password reset.
